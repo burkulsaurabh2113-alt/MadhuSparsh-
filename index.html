@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Madhusparsh - Diabetic Care</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        overscroll-behavior-y: none; /* Prevents pull-to-refresh on mobile for app-like feel */
+      }
+      
+      /* Pixel Font Class */
+      .font-pixel {
+        font-family: 'Press Start 2P', cursive;
+        letter-spacing: -2px;
+      }
+
+      /* Ultra-Smooth Scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Refined Scrollbar for "Easy Scroll" feel */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(74, 222, 128, 0.3); /* Subtle Green */
+        border-radius: 20px;
+        transition: background 0.3s ease;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(34, 197, 94, 0.6);
+      }
+
+      /* 120Hz Animation Curves (Apple-style ease) */
+      :root {
+        --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        --ease-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .gpu-accelerated {
+        transform: translateZ(0);
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+      }
+
+      /* Entry Animations */
+      .animate-slide-up {
+        animation: slideUp 0.8s var(--ease-smooth) forwards;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      
+      .animate-slide-in-right {
+        animation: slideInRight 0.6s var(--ease-smooth) forwards;
+        will-change: transform, opacity;
+      }
+
+      .animate-fade-scale {
+        animation: fadeScale 0.7s var(--ease-smooth) forwards;
+        will-change: transform, opacity;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      }
+
+      @keyframes slideUp {
+        from { opacity: 0; transform: translate3d(0, 50px, 0) scale(0.95); }
+        to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+      }
+
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translate3d(30px, 0, 0); }
+        to { opacity: 1; transform: translate3d(0, 0, 0); }
+      }
+
+      @keyframes fadeScale {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      /* 3D Glassy Live Text */
+      .text-3d-glass-live {
+        background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        transform: translateZ(0);
+      }
+
+      /* Enhanced 3D Bold Text */
+      .text-3d-bold {
+        color: #166534; /* Green-800 base */
+        text-shadow: 
+          0 1px 0 #22c55e,
+          0 2px 0 #16a34a,
+          0 3px 0 #15803d,
+          0 4px 0 #14532d,
+          0 6px 1px rgba(0,0,0,0.1),
+          0 0 5px rgba(0,0,0,0.1),
+          0 1px 3px rgba(0,0,0,0.3),
+          0 3px 5px rgba(0,0,0,0.2),
+          0 5px 10px rgba(0,0,0,0.25),
+          0 10px 10px rgba(0,0,0,0.2);
+        transform: rotateX(5deg) rotateY(0deg);
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease;
+      }
+      
+      .text-3d-bold:hover {
+         transform: rotateX(0deg) scale(1.02);
+      }
+
+      /* 3D Card Effects */
+      .perspective-container {
+        perspective: 1200px;
+      }
+      
+      .card-3d {
+        transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+        transform-style: preserve-3d;
+        transform: translateZ(0);
+      }
+
+      .card-3d:hover {
+        transform: translateY(-5px) scale(1.02) rotateX(2deg);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-content-3d {
+        transform: translateZ(0);
+        transition: transform 0.5s var(--ease-smooth);
+      }
+
+      .card-3d:hover .card-content-3d {
+        transform: translateZ(30px); /* Elements pop out */
+      }
+
+      .card-icon-3d {
+        transform: translateZ(0);
+        transition: transform 0.5s var(--ease-smooth);
+      }
+
+      .card-3d:hover .card-icon-3d {
+        transform: translateZ(50px) scale(1.1); /* Icons pop out more */
+      }
+
+      /* Gentle Floating */
+      @keyframes float-gentle {
+        0%, 100% { transform: translate3d(0, 0, 0); }
+        50% { transform: translate3d(0, -8px, 0); }
+      }
+      
+      .animate-float {
+        animation: float-gentle 6s ease-in-out infinite;
+        will-change: transform;
+      }
+
+      /* Falling Animation */
+      .falling-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 5;
+      }
+      .falling-item {
+        position: absolute;
+        top: -100px; /* Start above screen */
+        user-select: none;
+        animation: fall linear forwards;
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+      }
+      @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+      }
+
+      .bg-noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.015; /* Very subtle noise */
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+      
+      /* Print Styles */
+      @media print {
+        header, footer, .no-print {
+          display: none !important;
+        }
+        body {
+          background: white;
+        }
+        .print-only {
+          display: block !important;
+        }
+        .animate-fade-scale, .card-3d {
+          animation: none !important;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "clsx": "https://esm.sh/clsx",
+    "tailwind-merge": "https://esm.sh/tailwind-merge",
+    "@radix-ui/react-slot": "https://esm.sh/@radix-ui/react-slot",
+    "class-variance-authority": "https://esm.sh/class-variance-authority"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 selection:bg-green-200 selection:text-green-900">
+    <div class="bg-noise"></div>
+    <div id="root" class="relative z-10"></div>
+  </body>
+</html>
